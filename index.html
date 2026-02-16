@@ -489,6 +489,56 @@
       margin-left: 4px;
     }
 
+    /* YouTube Shorts */
+    .shorts-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .shorts-item {
+      position: relative;
+      aspect-ratio: 9/16;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .shorts-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .shorts-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .shorts-play {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 36px;
+      height: 36px;
+      background: rgba(255,0,0,0.85);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 12px;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .shorts-item:hover .shorts-play {
+      transform: translate(-50%, -50%) scale(1.15);
+      background: #ff0000;
+    }
+
     /* Clients Marquee */
     .clients-section {
       overflow: hidden;
@@ -843,16 +893,26 @@
           </a>
         </div>
 
-        <!-- YouTube Featured Video -->
+        <!-- YouTube Shorts -->
         <div class="section">
-          <p class="section-title">精選教學影片</p>
-          <div class="youtube-embed" id="youtubeContainer">
-            <img class="youtube-thumb" src="https://img.youtube.com/vi/nVyZ59MA57M/maxresdefault.jpg" alt="YouTube Video">
-            <div class="youtube-play" id="playBtn">
-              <svg width="24" height="24" viewBox="0 0 24 24">
-                <polygon points="5,3 19,12 5,21"/>
-              </svg>
-            </div>
+          <p class="section-title">精選短影片</p>
+          <div class="shorts-container">
+            <a href="https://youtube.com/shorts/T5flSp059mU" target="_blank" class="shorts-item">
+              <img src="https://img.youtube.com/vi/T5flSp059mU/oar2.jpg" alt="Short 1">
+              <div class="shorts-play">▶</div>
+            </a>
+            <a href="https://youtube.com/shorts/FBIRyZjBLTE" target="_blank" class="shorts-item">
+              <img src="https://img.youtube.com/vi/FBIRyZjBLTE/oar2.jpg" alt="Short 2">
+              <div class="shorts-play">▶</div>
+            </a>
+            <a href="https://youtube.com/shorts/JiwUpDcCnSY" target="_blank" class="shorts-item">
+              <img src="https://img.youtube.com/vi/JiwUpDcCnSY/oar2.jpg" alt="Short 3">
+              <div class="shorts-play">▶</div>
+            </a>
+            <a href="https://youtube.com/shorts/93q3qPtt0m0" target="_blank" class="shorts-item">
+              <img src="https://img.youtube.com/vi/93q3qPtt0m0/oar2.jpg" alt="Short 4">
+              <div class="shorts-play">▶</div>
+            </a>
           </div>
           <a href="https://www.youtube.com/@aiteacherfeng" target="_blank" class="link-item">
             <div class="link-icon" style="background: linear-gradient(135deg, #ff0000, #cc0000); color: white;">▶</div>
@@ -997,20 +1057,6 @@
         themeIcon.textContent = '☀️';
         localStorage.setItem('theme', 'dark');
       }
-    });
-
-    // YouTube Lazy Load
-    const youtubeContainer = document.getElementById('youtubeContainer');
-    const playBtn = document.getElementById('playBtn');
-    const thumb = youtubeContainer.querySelector('.youtube-thumb');
-
-    playBtn.addEventListener('click', () => {
-      const iframe = document.createElement('iframe');
-      iframe.src = 'https://www.youtube.com/embed/nVyZ59MA57M?autoplay=1&rel=0';
-      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-      iframe.allowFullscreen = true;
-      youtubeContainer.innerHTML = '';
-      youtubeContainer.appendChild(iframe);
     });
 
     // QR Modal
