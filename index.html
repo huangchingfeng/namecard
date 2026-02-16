@@ -122,6 +122,78 @@
       box-shadow: var(--shadow-lg);
     }
 
+    /* Language Selector */
+    .language-selector {
+      position: fixed;
+      top: 20px;
+      right: 80px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 8px 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      box-shadow: var(--shadow-md);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 100;
+      color: var(--text-primary);
+    }
+
+    .language-selector:hover {
+      transform: scale(1.05);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .language-dropdown {
+      position: fixed;
+      top: 76px;
+      right: 80px;
+      background: var(--bg-card);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 8px;
+      box-shadow: var(--shadow-lg);
+      z-index: 101;
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 140px;
+    }
+
+    .language-dropdown.active {
+      display: flex;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .language-option {
+      padding: 10px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text-primary);
+    }
+
+    .language-option:hover {
+      background: var(--bg-card-hover);
+    }
+
+    .language-option.active {
+      background: var(--accent-gradient);
+      color: white;
+    }
+
     /* Main Container */
     .container {
       max-width: 480px;
@@ -812,10 +884,69 @@
       .contact-grid {
         gap: 10px;
       }
+
+      /* Language Selector - Mobile */
+      .language-selector {
+        top: 12px;
+        right: 12px;
+        padding: 6px 12px;
+        font-size: 13px;
+        gap: 4px;
+      }
+
+      .language-dropdown {
+        top: 56px;
+        right: 12px;
+        min-width: 120px;
+      }
+
+      .language-option {
+        padding: 8px 12px;
+        font-size: 13px;
+      }
+
+      /* Theme Toggle - Mobile */
+      .theme-toggle {
+        top: 64px;
+        right: 12px;
+        width: 44px;
+        height: 44px;
+        font-size: 18px;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Language Selector -->
+  <div class="language-selector" id="languageSelector">
+    <span id="currentLangFlag">🇹🇼</span>
+    <span id="currentLangText">繁中</span>
+    <span>▾</span>
+  </div>
+
+  <div class="language-dropdown" id="languageDropdown">
+    <div class="language-option active" data-lang="zh-TW">
+      <span>🇹🇼</span>
+      <span>繁體中文</span>
+    </div>
+    <div class="language-option" data-lang="zh-CN">
+      <span>🇨🇳</span>
+      <span>简体中文</span>
+    </div>
+    <div class="language-option" data-lang="en">
+      <span>🇺🇸</span>
+      <span>English</span>
+    </div>
+    <div class="language-option" data-lang="ja">
+      <span>🇯🇵</span>
+      <span>日本語</span>
+    </div>
+    <div class="language-option" data-lang="ko">
+      <span>🇰🇷</span>
+      <span>한국어</span>
+    </div>
+  </div>
+
   <!-- Theme Toggle -->
   <button class="theme-toggle" id="themeToggle" aria-label="切換深色/淺色模式">
     <span class="theme-icon">🌙</span>
@@ -830,32 +961,59 @@
           <img src="https://www.autolab.cloud/teacher-photo.jpg" alt="阿峰老師" class="avatar">
           <span class="avatar-badge">✓</span>
         </div>
-        <h1 class="name">阿峰老師</h1>
-        <p class="title">AI 實戰培訓專家</p>
+        <h1 class="name" data-i18n="name">阿峰老師</h1>
+        <p class="title" data-i18n="title">AI 實戰培訓專家</p>
         <p class="tagline">黃敬峰 Jingfeng Huang</p>
 
         <div class="stats">
           <div class="stat">
             <div class="stat-number">400+</div>
-            <div class="stat-label">企業合作</div>
+            <div class="stat-label" data-i18n="stats.companies">企業合作</div>
           </div>
           <div class="stat">
             <div class="stat-number">10,000+</div>
-            <div class="stat-label">培訓學員</div>
+            <div class="stat-label" data-i18n="stats.students">培訓學員</div>
           </div>
           <div class="stat">
             <div class="stat-number">300+</div>
-            <div class="stat-label">社群學員</div>
+            <div class="stat-label" data-i18n="stats.community">社群學員</div>
           </div>
         </div>
         <div class="stats" style="margin-top: 12px;">
           <div class="stat">
             <div class="stat-number">🇲🇾 15+</div>
-            <div class="stat-label">馬來西亞場次</div>
+            <div class="stat-label" data-i18n="stats.malaysia">馬來西亞場次</div>
           </div>
           <div class="stat">
             <div class="stat-number">500+</div>
-            <div class="stat-label">海外學員</div>
+            <div class="stat-label" data-i18n="stats.overseas">海外學員</div>
+          </div>
+        </div>
+
+        <!-- BNI Badge -->
+        <div style="margin-top: 20px; position: relative; z-index: 1;">
+          <div style="background: rgba(255,255,255,0.2); backdrop-filter: blur(10px); padding: 16px 20px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.3); max-width: 380px; margin: 0 auto;">
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
+              <span style="font-size: 28px;">🤝</span>
+              <div style="text-align: left; flex: 1;">
+                <div style="color: white; font-weight: 700; font-size: 15px;" data-i18n="bni.mainTitle">BNI 華字輩區域培訓董事顧問</div>
+                <div style="color: rgba(255,255,255,0.9); font-size: 13px; margin-top: 2px;" data-i18n="bni.chapterAdvisor">華軍分會董事顧問</div>
+              </div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 10px;">
+              <div style="text-align: center;">
+                <div style="color: white; font-weight: 700; font-size: 16px; font-family: 'Inter', sans-serif;">13</div>
+                <div style="color: rgba(255,255,255,0.85); font-size: 11px;" data-i18n="bni.yearsLabel">年經驗</div>
+              </div>
+              <div style="text-align: center;">
+                <div style="color: white; font-weight: 700; font-size: 16px; font-family: 'Inter', sans-serif;">1000萬+</div>
+                <div style="color: rgba(255,255,255,0.85); font-size: 11px;" data-i18n="bni.referralsLabel">引薦金額</div>
+              </div>
+              <div style="text-align: center;">
+                <div style="color: white; font-weight: 700; font-size: 16px; font-family: 'Inter', sans-serif;">100+</div>
+                <div style="color: rgba(255,255,255,0.85); font-size: 11px;" data-i18n="bni.annualLabel">年度引薦</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -870,7 +1028,7 @@
                 <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
               </svg>
             </div>
-            加 LINE
+            <span data-i18n="contact.addLine">加 LINE</span>
           </button>
           <button class="contact-btn phone" id="addContactBtn">
             <div class="contact-icon">
@@ -881,7 +1039,7 @@
                 <line x1="22" y1="11" x2="16" y2="11"/>
               </svg>
             </div>
-            加入聯絡人
+            <span data-i18n="contact.addContact">加入聯絡人</span>
           </button>
           <a href="https://www.youtube.com/@aiteacherfeng" target="_blank" class="contact-btn youtube">
             <div class="contact-icon">
@@ -889,13 +1047,13 @@
                 <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
               </svg>
             </div>
-            YouTube
+            <span data-i18n="contact.youtube">YouTube</span>
           </a>
         </div>
 
         <!-- YouTube Shorts -->
         <div class="section">
-          <p class="section-title">精選短影片</p>
+          <p class="section-title" data-i18n="sections.shorts">精選短影片</p>
           <div class="shorts-container">
             <a href="https://youtube.com/shorts/T5flSp059mU" target="_blank" class="shorts-item">
               <img src="https://img.youtube.com/vi/T5flSp059mU/oar2.jpg" alt="Short 1">
@@ -917,8 +1075,8 @@
           <a href="https://www.youtube.com/@aiteacherfeng" target="_blank" class="link-item">
             <div class="link-icon" style="background: linear-gradient(135deg, #ff0000, #cc0000); color: white;">▶</div>
             <div class="link-content">
-              <div class="link-title">更多教學影片</div>
-              <div class="link-desc">AI 工具實戰教學、職場應用技巧</div>
+              <div class="link-title" data-i18n="links.moreVideos.title">更多教學影片</div>
+              <div class="link-desc" data-i18n="links.moreVideos.desc">AI 工具實戰教學、職場應用技巧</div>
             </div>
             <span class="link-arrow">→</span>
           </a>
@@ -926,29 +1084,29 @@
 
         <!-- Links -->
         <div class="section">
-          <p class="section-title">探索更多</p>
+          <p class="section-title" data-i18n="sections.explore">探索更多</p>
           <div class="links-list">
             <a href="https://www.autolab.cloud/" target="_blank" class="link-item">
               <div class="link-icon" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white;">🌐</div>
               <div class="link-content">
-                <div class="link-title">阿峰老師官網</div>
-                <div class="link-desc">課程資訊、企業內訓</div>
+                <div class="link-title" data-i18n="links.website.title">阿峰老師官網</div>
+                <div class="link-desc" data-i18n="links.website.desc">課程資訊、企業內訓</div>
               </div>
               <span class="link-arrow">→</span>
             </a>
             <a href="https://www.autolab.cloud/blog" target="_blank" class="link-item">
               <div class="link-icon" style="background: linear-gradient(135deg, #f59e0b, #ef4444); color: white;">📝</div>
               <div class="link-content">
-                <div class="link-title">部落格文章</div>
-                <div class="link-desc">AI 趨勢、教學、心得分享</div>
+                <div class="link-title" data-i18n="links.blog.title">部落格文章</div>
+                <div class="link-desc" data-i18n="links.blog.desc">AI 趨勢、教學、心得分享</div>
               </div>
               <span class="link-arrow">→</span>
             </a>
             <a href="https://www.autolab.cloud/2026-ai-course" target="_blank" class="link-item">
               <div class="link-icon" style="background: linear-gradient(135deg, #10b981, #059669); color: white;">📅</div>
               <div class="link-content">
-                <div class="link-title">2026 公開課程</div>
-                <div class="link-desc">最新開課資訊、立即報名</div>
+                <div class="link-title" data-i18n="links.courses.title">2026 公開課程</div>
+                <div class="link-desc" data-i18n="links.courses.desc">最新開課資訊、立即報名</div>
               </div>
               <span class="link-arrow">→</span>
             </a>
@@ -957,19 +1115,19 @@
 
         <!-- Community -->
         <div class="section">
-          <p class="section-title">加入學員社群</p>
+          <p class="section-title" data-i18n="sections.community">加入學員社群</p>
           <div class="community-grid">
             <a href="https://reurl.cc/GGlLNx" target="_blank" class="community-btn line">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
               </svg>
-              LINE 社群
+              <span data-i18n="community.line">LINE 社群</span>
             </a>
             <a href="https://chat.whatsapp.com/BemCCL9DsW1GyH4OkO20Rt" target="_blank" class="community-btn whatsapp">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
               </svg>
-              WhatsApp
+              <span data-i18n="community.whatsapp">WhatsApp</span>
             </a>
           </div>
         </div>
@@ -977,7 +1135,7 @@
 
       <!-- Clients Marquee -->
       <div class="clients-section">
-        <p class="clients-title">超過 400 家企業信任</p>
+        <p class="clients-title" data-i18n="clients.title">超過 400 家企業信任</p>
         <div class="clients-marquee" id="clientsMarquee">
           <img src="https://www.autolab.cloud/logos/tsmc.png" alt="台積電" class="client-logo">
           <img src="https://www.autolab.cloud/logos/asus.png" alt="華碩" class="client-logo">
@@ -1009,7 +1167,7 @@
 
       <!-- Footer -->
       <div class="card-footer">
-        <p class="motto">「<strong>你是機長，AI是機組人員</strong>」</p>
+        <p class="motto" data-i18n="motto">「<strong>你是機長，AI是機組人員</strong>」</p>
       </div>
     </div>
   </div>
@@ -1017,22 +1175,418 @@
   <!-- QR Modal -->
   <div class="modal-overlay" id="qrModal">
     <div class="modal">
-      <h3 class="modal-title">加入阿峰老師 LINE</h3>
-      <p class="modal-desc">掃描 QR Code 或點擊複製 ID</p>
+      <h3 class="modal-title" data-i18n="modal.title">加入阿峰老師 LINE</h3>
+      <p class="modal-desc" data-i18n="modal.desc">掃描 QR Code 或點擊複製 ID</p>
       <div class="qr-code">
         <img src="https://qr-official.line.me/gs/M_389uwgji_BW.png" alt="LINE QR Code">
       </div>
       <div class="copy-btn" id="copyLineId">
         📋 @389uwgji
       </div>
-      <button class="modal-close" id="closeModal">關閉</button>
+      <button class="modal-close" id="closeModal" data-i18n="modal.close">關閉</button>
     </div>
   </div>
 
   <!-- Toast -->
-  <div class="toast" id="toast">已複製到剪貼簿！</div>
+  <div class="toast" id="toast" data-i18n="toast.copied">已複製到剪貼簿！</div>
 
   <script>
+    // Translations
+    const translations = {
+      'zh-TW': {
+        name: '阿峰老師',
+        title: 'AI 實戰培訓專家',
+        stats: {
+          companies: '企業合作',
+          students: '培訓學員',
+          community: '社群學員',
+          malaysia: '馬來西亞場次',
+          overseas: '海外學員'
+        },
+        bni: {
+          mainTitle: 'BNI 華字輩區域培訓董事顧問',
+          chapterAdvisor: '華軍分會董事顧問',
+          yearsLabel: '年經驗',
+          referralsLabel: '引薦金額',
+          annualLabel: '年度引薦'
+        },
+        contact: {
+          addLine: '加 LINE',
+          addContact: '加入聯絡人',
+          youtube: 'YouTube'
+        },
+        sections: {
+          shorts: '精選短影片',
+          explore: '探索更多',
+          community: '加入學員社群'
+        },
+        links: {
+          moreVideos: {
+            title: '更多教學影片',
+            desc: 'AI 工具實戰教學、職場應用技巧'
+          },
+          website: {
+            title: '阿峰老師官網',
+            desc: '課程資訊、企業內訓'
+          },
+          blog: {
+            title: '部落格文章',
+            desc: 'AI 趨勢、教學、心得分享'
+          },
+          courses: {
+            title: '2026 公開課程',
+            desc: '最新開課資訊、立即報名'
+          }
+        },
+        community: {
+          line: 'LINE 社群',
+          whatsapp: 'WhatsApp'
+        },
+        clients: {
+          title: '超過 400 家企業信任'
+        },
+        motto: '「<strong>你是機長，AI是機組人員</strong>」',
+        modal: {
+          title: '加入阿峰老師 LINE',
+          desc: '掃描 QR Code 或點擊複製 ID',
+          close: '關閉'
+        },
+        toast: {
+          copied: '已複製到剪貼簿！',
+          lineCopied: '已複製 LINE ID！',
+          contactDownloaded: '聯絡人已下載！'
+        }
+      },
+      'zh-CN': {
+        name: '阿峰老师',
+        title: 'AI 实战培训专家',
+        stats: {
+          companies: '企业合作',
+          students: '培训学员',
+          community: '社群学员',
+          malaysia: '马来西亚场次',
+          overseas: '海外学员'
+        },
+        bni: {
+          mainTitle: 'BNI 华字辈区域培训董事顾问',
+          chapterAdvisor: '华军分会董事顾问',
+          yearsLabel: '年经验',
+          referralsLabel: '引荐金额',
+          annualLabel: '年度引荐'
+        },
+        contact: {
+          addLine: '加 LINE',
+          addContact: '添加联系人',
+          youtube: 'YouTube'
+        },
+        sections: {
+          shorts: '精选短视频',
+          explore: '探索更多',
+          community: '加入学员社群'
+        },
+        links: {
+          moreVideos: {
+            title: '更多教学视频',
+            desc: 'AI 工具实战教学、职场应用技巧'
+          },
+          website: {
+            title: '阿峰老师官网',
+            desc: '课程信息、企业内训'
+          },
+          blog: {
+            title: '博客文章',
+            desc: 'AI 趋势、教学、心得分享'
+          },
+          courses: {
+            title: '2026 公开课程',
+            desc: '最新开课信息、立即报名'
+          }
+        },
+        community: {
+          line: 'LINE 社群',
+          whatsapp: 'WhatsApp'
+        },
+        clients: {
+          title: '超过 400 家企业信赖'
+        },
+        motto: '「<strong>你是机长，AI是机组人员</strong>」',
+        modal: {
+          title: '加入阿峰老师 LINE',
+          desc: '扫描 QR Code 或点击复制 ID',
+          close: '关闭'
+        },
+        toast: {
+          copied: '已复制到剪贴板！',
+          lineCopied: '已复制 LINE ID！',
+          contactDownloaded: '联系人已下载！'
+        }
+      },
+      'en': {
+        name: 'Teacher Afeng',
+        title: 'AI Training Expert',
+        stats: {
+          companies: 'Corporate Clients',
+          students: 'Trained Students',
+          community: 'Community Members',
+          malaysia: 'Malaysia Sessions',
+          overseas: 'Overseas Students'
+        },
+        bni: {
+          mainTitle: 'BNI Regional Training Director Consultant',
+          chapterAdvisor: 'Chapter Director Consultant',
+          yearsLabel: 'Years',
+          referralsLabel: 'Referrals',
+          annualLabel: 'Yearly'
+        },
+        contact: {
+          addLine: 'Add LINE',
+          addContact: 'Add Contact',
+          youtube: 'YouTube'
+        },
+        sections: {
+          shorts: 'Featured Shorts',
+          explore: 'Explore More',
+          community: 'Join Community'
+        },
+        links: {
+          moreVideos: {
+            title: 'More Videos',
+            desc: 'AI Tools & Workplace Applications'
+          },
+          website: {
+            title: 'Official Website',
+            desc: 'Courses & Corporate Training'
+          },
+          blog: {
+            title: 'Blog Articles',
+            desc: 'AI Trends, Tutorials & Insights'
+          },
+          courses: {
+            title: '2026 Public Courses',
+            desc: 'Latest Schedule & Registration'
+          }
+        },
+        community: {
+          line: 'LINE Community',
+          whatsapp: 'WhatsApp'
+        },
+        clients: {
+          title: 'Trusted by 400+ Companies'
+        },
+        motto: '「<strong>You are the Pilot, AI is the Crew</strong>」',
+        modal: {
+          title: 'Add Teacher Afeng on LINE',
+          desc: 'Scan QR Code or Copy ID',
+          close: 'Close'
+        },
+        toast: {
+          copied: 'Copied to clipboard!',
+          lineCopied: 'LINE ID copied!',
+          contactDownloaded: 'Contact downloaded!'
+        }
+      },
+      'ja': {
+        name: 'アフェン先生',
+        title: 'AI実戦研修エキスパート',
+        stats: {
+          companies: '企業パートナー',
+          students: '研修受講生',
+          community: 'コミュニティ生徒',
+          malaysia: 'マレーシア開催',
+          overseas: '海外受講生'
+        },
+        bni: {
+          mainTitle: 'BNI 地域研修ディレクターコンサルタント',
+          chapterAdvisor: 'チャプターディレクターコンサルタント',
+          yearsLabel: '年の経験',
+          referralsLabel: '紹介実績',
+          annualLabel: '年間紹介'
+        },
+        contact: {
+          addLine: 'LINEを追加',
+          addContact: '連絡先を追加',
+          youtube: 'YouTube'
+        },
+        sections: {
+          shorts: '注目のショート動画',
+          explore: 'もっと見る',
+          community: 'コミュニティに参加'
+        },
+        links: {
+          moreVideos: {
+            title: 'もっと動画を見る',
+            desc: 'AIツール実戦教育・職場応用テクニック'
+          },
+          website: {
+            title: '公式ウェブサイト',
+            desc: 'コース情報・企業研修'
+          },
+          blog: {
+            title: 'ブログ記事',
+            desc: 'AIトレンド・教育・シェア'
+          },
+          courses: {
+            title: '2026年公開コース',
+            desc: '最新スケジュール・お申し込み'
+          }
+        },
+        community: {
+          line: 'LINEコミュニティ',
+          whatsapp: 'WhatsApp'
+        },
+        clients: {
+          title: '400社以上の企業に信頼されています'
+        },
+        motto: '「<strong>あなたはパイロット、AIは乗務員</strong>」',
+        modal: {
+          title: 'アフェン先生のLINEを追加',
+          desc: 'QRコードをスキャンまたはIDをコピー',
+          close: '閉じる'
+        },
+        toast: {
+          copied: 'クリップボードにコピーしました！',
+          lineCopied: 'LINE IDをコピーしました！',
+          contactDownloaded: '連絡先をダウンロードしました！'
+        }
+      },
+      'ko': {
+        name: '아펑 선생님',
+        title: 'AI 실전 교육 전문가',
+        stats: {
+          companies: '기업 파트너',
+          students: '교육 수강생',
+          community: '커뮤니티 학생',
+          malaysia: '말레이시아 세션',
+          overseas: '해외 학생'
+        },
+        bni: {
+          mainTitle: 'BNI 지역 교육 이사 컨설턴트',
+          chapterAdvisor: '챕터 이사 컨설턴트',
+          yearsLabel: '년 경력',
+          referralsLabel: '추천 금액',
+          annualLabel: '연간 추천'
+        },
+        contact: {
+          addLine: 'LINE 추가',
+          addContact: '연락처 추가',
+          youtube: 'YouTube'
+        },
+        sections: {
+          shorts: '주요 쇼츠',
+          explore: '더 보기',
+          community: '커뮤니티 가입'
+        },
+        links: {
+          moreVideos: {
+            title: '더 많은 동영상',
+            desc: 'AI 도구 실전 교육 및 직장 응용 기술'
+          },
+          website: {
+            title: '공식 웹사이트',
+            desc: '과정 정보 및 기업 교육'
+          },
+          blog: {
+            title: '블로그 게시물',
+            desc: 'AI 트렌드, 교육, 인사이트'
+          },
+          courses: {
+            title: '2026 공개 과정',
+            desc: '최신 일정 및 등록'
+          }
+        },
+        community: {
+          line: 'LINE 커뮤니티',
+          whatsapp: 'WhatsApp'
+        },
+        clients: {
+          title: '400개 이상의 기업이 신뢰'
+        },
+        motto: '「<strong>당신은 기장, AI는 승무원</strong>」',
+        modal: {
+          title: '아펑 선생님 LINE 추가',
+          desc: 'QR 코드 스캔 또는 ID 복사',
+          close: '닫기'
+        },
+        toast: {
+          copied: '클립보드에 복사되었습니다!',
+          lineCopied: 'LINE ID가 복사되었습니다!',
+          contactDownloaded: '연락처가 다운로드되었습니다!'
+        }
+      }
+    };
+
+    // Language Configuration
+    const langConfig = {
+      'zh-TW': { flag: '🇹🇼', name: '繁中' },
+      'zh-CN': { flag: '🇨🇳', name: '简中' },
+      'en': { flag: '🇺🇸', name: 'EN' },
+      'ja': { flag: '🇯🇵', name: '日本語' },
+      'ko': { flag: '🇰🇷', name: '한국어' }
+    };
+
+    // Get nested object value by path
+    function getNestedValue(obj, path) {
+      return path.split('.').reduce((current, key) => current?.[key], obj);
+    }
+
+    // Update page language
+    function updateLanguage(lang) {
+      const t = translations[lang];
+      if (!t) return;
+
+      // Update all elements with data-i18n
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const value = getNestedValue(t, key);
+        if (value) {
+          el.innerHTML = value;
+        }
+      });
+
+      // Update current language display
+      document.getElementById('currentLangFlag').textContent = langConfig[lang].flag;
+      document.getElementById('currentLangText').textContent = langConfig[lang].name;
+
+      // Update active state
+      document.querySelectorAll('.language-option').forEach(option => {
+        option.classList.toggle('active', option.dataset.lang === lang);
+      });
+
+      // Save to localStorage
+      localStorage.setItem('language', lang);
+
+      // Update HTML lang attribute
+      document.documentElement.lang = lang;
+    }
+
+    // Initialize language
+    const savedLang = localStorage.getItem('language') || 'zh-TW';
+    updateLanguage(savedLang);
+
+    // Language selector toggle
+    const languageSelector = document.getElementById('languageSelector');
+    const languageDropdown = document.getElementById('languageDropdown');
+
+    languageSelector.addEventListener('click', () => {
+      languageDropdown.classList.toggle('active');
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!languageSelector.contains(e.target) && !languageDropdown.contains(e.target)) {
+        languageDropdown.classList.remove('active');
+      }
+    });
+
+    // Language option click
+    document.querySelectorAll('.language-option').forEach(option => {
+      option.addEventListener('click', () => {
+        const lang = option.dataset.lang;
+        updateLanguage(lang);
+        languageDropdown.classList.remove('active');
+      });
+    });
+
     // Theme Toggle
     const themeToggle = document.getElementById('themeToggle');
     const themeIcon = themeToggle.querySelector('.theme-icon');
@@ -1084,7 +1638,8 @@
     copyLineId.addEventListener('click', async () => {
       try {
         await navigator.clipboard.writeText('@389uwgji');
-        showToast('已複製 LINE ID！');
+        const lang = localStorage.getItem('language') || 'zh-TW';
+        showToast(translations[lang].toast.lineCopied);
       } catch (err) {
         const textArea = document.createElement('textarea');
         textArea.value = '@389uwgji';
@@ -1092,12 +1647,13 @@
         textArea.select();
         document.execCommand('copy');
         document.body.removeChild(textArea);
-        showToast('已複製 LINE ID！');
+        const lang = localStorage.getItem('language') || 'zh-TW';
+        showToast(translations[lang].toast.lineCopied);
       }
     });
 
     function showToast(message) {
-      toast.textContent = message;
+      toast.innerHTML = message;
       toast.classList.add('show');
       setTimeout(() => {
         toast.classList.remove('show');
@@ -1137,7 +1693,8 @@ END:VCARD`;
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
 
-      showToast('聯絡人已下載！');
+      const lang = localStorage.getItem('language') || 'zh-TW';
+      showToast(translations[lang].toast.contactDownloaded);
     });
   </script>
 </body>
